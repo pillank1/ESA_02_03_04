@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create hero</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body>
+<div class="container w-50">
+    <form th:method="post" th:action="@{/heroes/create}" th:object="${hero}">
+        <h1>Create hero</h1>
+        <div class="form-group">
+            <label for="nameHero">Hero name: </label>
+            <input class="form-control" id="nameHero" th:field="*{nameHero}" type="text" required/>
+        </div>
+        <div class="form-group">
+            <label for="level">Level: </label>
+            <input class="form-control" id="level" th:field="*{level}" type="number" min="1" max="15"
+                   required/>
+        </div>
+        <div class="form-group">
+            <label for="classHero">Class: </label>
+            <select class="form-select" id="classHero" th:name="*{classHero}" th:field="*{classHero}" type="text">
+                <option th:value="Bard">Bard</option>
+                <option th:value="Barbarian">Barbarian</option>
+                <option th:value="Fighter">Fighter</option>
+                <option th:value="Wizard">Wizard</option>
+                <option th:value="Druid">Druid</option>
+                <option th:value="Cleric">Cleric</option>
+                <option th:value="Warlock">Warlock</option>
+                <option th:value="Monk">Monk</option>
+                <option th:value="Paladin">Paladin</option>
+                <option th:value="Rogue">Rogue</option>
+                <option th:value="Ranger">Ranger</option>
+                <option th:value="Sorcerer">Sorcerer</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="spellCells">Spell cells: </label>
+            <input class="form-control" id="spellCells" th:field="*{spellCells}" type="number" min="1" max="10"
+                   required/>
+            <div id="spellCellsHelp" class="form-text">You can enter spell cells in the range from 0 to 10.</div>
+        </div>
+        <div class="form-group">
+            <label for="playerId">Player id: </label>
+            <select class="form-control" id="playerId" th:name="playerId" required>
+                <option th:each="playerId : ${playerIds}" th:value="${playerId}" th:text="${playerId}">
+                </option>
+            </select>
+        </div>
+        <br>
+        <input type="submit" value="Create" class="btn btn-success"/>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update hero</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body>
+<div class="container w-50">
+    <form th:method="patch" th:action="@{/heroes/{id}/update(id=${hero.id})}" th:object="${hero}">
+        <h1>Update hero</h1>
+        <input type="hidden" th:field="*{id}">
+        <div class="form-group">
+            <label for="nameHero">Name hero: </label>
+            <input class="form-control" id="nameHero" th:field="*{nameHero}" type="text" required/>
+        </div>
+        <div class="form-group">
+            <label for="level">Level: </label>
+            <input class="form-control" id="level" th:field="*{level}" type="number" min="1" max="15" required/>
+        </div>
+        <div class="form-group">
+            <label for="classHero">Class hero: </label>
+            <select class="form-select" id="classHero" th:field="*{classHero}" th:name="${classHero}">
+                <option value="Bard">Bard</option>
+                <option value="Barbarian">Barbarian</option>
+                <option value="Fighter">Fighter</option>
+                <option value="Wizard">Wizard</option>
+                <option value="Druid">Druid</option>
+                <option value="Cleric">Cleric</option>
+                <option value="Warlock">Warlock</option>
+                <option value="Monk">Monk</option>
+                <option value="Paladin">Paladin</option>
+                <option value="Rogue">Rogue</option>
+                <option value="Ranger">Ranger</option>
+                <option value="Sorcerer">Sorcerer</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="spellCells">Spell cells: </label>
+            <input class="form-control" id="spellCells" th:field="*{spellCells}" type="number" min="1" max="20" required/>
+        </div>
+        <div class="form-group">
+            <label for="playerId">Player id: </label>
+            <select class="form-control" id="playerId" th:name="playerId" required>
+                <option th:each="playerId : ${playerIds}" th:value="${playerId}" th:text="${playerId}"
+                        th:selected="${playerId==hero.player.id}">
+                </option>
+            </select>
+        </div>
+        <br>
+        <input type="submit" value="Update" class="btn btn-warning"/>
+    </form>
+</div>
+</body>
+</html>

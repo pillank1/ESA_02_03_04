@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Main Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <div class="text-center">
+        <form th:action="@{/players/create}" th:method="get">
+            <button class="btn btn-success">Create player</button>
+        </form>
+    </div>
+    <table class="table table-striped table-primary">
+        <caption style="caption-side: top">Players</caption>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Birthday</th>
+            <th>Quantity games</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="player : ${players}">
+            <td th:text="${player.id}">
+            </td>
+            <td th:text="${player.firstName}">
+            <td>
+            <td th:text="${player.lastName}">
+            <td>
+            <td th:text="${player.birthdate}">
+            <td>
+            <td th:text="${player.quantityGames}">
+            <td>
+                <form th:action="@{/players/{id}/update(id=${player.id})}">
+                    <input type="submit" class="btn btn-warning" value="Update">
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/players/{id}/delete(id=${player.id})}" th:method="delete">
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <form th:action="@{/heroes/create}" th:method="get">
+            <button class="btn btn-success">Create hero</button>
+        </form>
+    </div>
+    <table class="table table-striped table-success">
+        <caption style="caption-side: top">Heroes</caption>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name hero</th>
+            <th>Level</th>
+            <th>Class</th>
+            <th>Spell cells</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tr th:each="hero : ${heroes}">
+            <td th:text="${hero.id}">
+            </td>
+            <td th:text="${hero.nameHero}">
+            </td>
+            <td th:text="${hero.level}">
+            </td>
+            <td th:text="${hero.classHero}">
+            </td>
+            <td th:text="${hero.spellCells}">
+            </td>
+            <td th:text="${hero.player.id}">
+            </td>
+            <td>
+                <form th:action="@{/heroes/{id}/update(id=${hero.id})}">
+                    <input type="submit" class="btn btn-warning" value="Update">
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/heroes/{id}/delete(id=${hero.id})}" th:method="delete">
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
